@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -9,7 +10,7 @@ import {
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
@@ -25,6 +26,7 @@ export class ProductCardComponent {
   @Output()
   isShowChange = new EventEmitter<boolean>();
 
+  @Input() createDate!: Date;
   onSetDisplay(isShow: boolean): void {
     this.isShowChange.emit(isShow);
   }
