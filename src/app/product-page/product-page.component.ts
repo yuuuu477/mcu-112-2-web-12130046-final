@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../model/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-product-page',
@@ -10,79 +11,22 @@ import { ProductCardListComponent } from '../product-card-list/product-card-list
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css',
 })
-export class ProductPageComponent {
-  products = [
-    new Product({
-      id: 1,
-      name: 'A產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: true,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-    new Product({
-      id: 2,
-      name: 'B產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: false,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-    new Product({
-      id: 3,
-      name: 'C產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: false,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-    new Product({
-      id: 4,
-      name: 'D產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: false,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-    new Product({
-      id: 5,
-      name: 'E產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: false,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-    new Product({
-      id: 6,
-      name: 'F產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      isShow: true,
-      discount: false,
-      imgUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date(),
-      price: 1580.0,
-    }),
-  ];
-
+export class ProductPageComponent implements OnInit {
   router = inject(Router);
 
+  private productService = inject(ProductService);
+
+  products!: Product[];
+
+  ngOnInit(): void {
+    this.productService = new ProductService();
+    this.products = this.productService.getList();
+  }
+
+  onEdit(product: Product): void {
+    this.router.navigate(['product', 'form', product.id]);
+  }
   onView(product: Product): void {
-    this.router.navigate(['product', product.id]);
+    this.router.navigate(['product', 'view', product.id]);
   }
 }
