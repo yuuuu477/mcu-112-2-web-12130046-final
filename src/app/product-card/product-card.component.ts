@@ -25,6 +25,9 @@ export class ProductCardComponent {
   @Input({ transform: booleanAttribute })
   isShow!: boolean;
 
+  @Input({ transform: booleanAttribute })
+  discount = true;
+
   @Input() createDate!: Date;
   @Input({ transform: numberAttribute }) price!: number;
 

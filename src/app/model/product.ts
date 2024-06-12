@@ -14,6 +14,8 @@ export class Product {
 
   isShow!: boolean;
 
+  discount!: boolean;
+
   imgUrl!: string;
 
   createDate!: Date;

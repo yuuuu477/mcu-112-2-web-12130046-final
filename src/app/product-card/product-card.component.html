@@ -1,6 +1,6 @@
 <img src="https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img" />
 <div class="content">
-  <strong style="color: red">A 產品</strong>
+  <strong [class.discount]="discount">{{ productName }}</strong>
   <span>{{ createDate | date : "yyyy-MM-dd" }}</span>
 </div>
 
@@ -16,6 +16,6 @@
   <span>{{ price | currency }}</span>
 </div>
 <div class="button">
-  <button type="button">明細</button>
+  <button type="button" (click)="view.emit()">明細</button>
   <button type="button" class="edit">加入購物車</button>
 </div>
