@@ -2,7 +2,14 @@
 <div class="content">
   <strong style="color: red">A 產品</strong>
 </div>
-<div>作者A、作者B、作者C</div>
+<span>{{ createDate | date : "yyyy-MM-dd" }}</span>
+<div>
+  @for (author of authors; track author) {
+  <span>{{ author }}</span>
+  @if (!$last) {
+  <span>、</span>
+  } }
+</div>
 <div class="company">
   <span>博碩文化</span>
   <span>{{ price | currency }}</span>
