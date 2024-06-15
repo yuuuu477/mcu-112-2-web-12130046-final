@@ -1,11 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import {
-  Component,
-  Input,
-  OnInit,
-  inject,
-  numberAttribute,
-} from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../model/product';
 import { ProductService } from '../service/product.service';
@@ -18,6 +12,7 @@ import { ProductService } from '../service/product.service';
   styleUrl: './product-detail-page.component.css',
 })
 export class ProductDetailPageComponent {
+  @Input()
   private productService = inject(ProductService);
   product = new Product({
     id: 1,
