@@ -13,7 +13,7 @@ import { IOrderDetailForm } from '../interface/order-detail-form.interface';
 @Component({
   selector: 'app-shopping-cart-page',
   standalone: true,
-  imports: [JsonPipe, CurrencyPipe, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './shopping-cart-page.component.html',
   styleUrl: './shopping-cart-page.component.css',
 })
@@ -25,6 +25,18 @@ export class ShoppingCartPageComponent {
     telephone: new FormControl<string | null>(null),
     details: new FormArray<FormGroup<IOrderDetailForm>>([]),
   });
+
+  get name(): FormControl<string | null> {
+    return this.form.get('name') as FormControl<string | null>;
+  }
+
+  get address(): FormControl<string | null> {
+    return this.form.get('name') as FormControl<string | null>;
+  }
+
+  get telephone(): FormControl<string | null> {
+    return this.form.get('name') as FormControl<string | null>;
+  }
 
   get details(): FormArray<FormGroup<IOrderDetailForm>> {
     return this.form.get('details') as FormArray<FormGroup<IOrderDetailForm>>;
