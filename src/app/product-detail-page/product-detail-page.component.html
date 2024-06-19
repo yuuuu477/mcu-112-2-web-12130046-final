@@ -17,12 +17,17 @@
   </div>
   <div>
     <strong>價格</strong>
-    <span>{{ product.price | currency }}</span>
+    <span>
+      <span>{{ product.price | currency }}</span>
+      @if(product.discount){
+      <span class="discount">特價</span>
+      }
+    </span>
   </div>
   <div class="button">
     <button type="button" (click)="onBack()">返回</button>
     <span>
-      <button type="button" class="addToCart">加入購物車</button>
+      <button type="button" class="edit">加入購物車</button>
     </span>
   </div>
 </section>
