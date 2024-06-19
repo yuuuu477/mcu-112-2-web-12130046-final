@@ -6,6 +6,7 @@
 <app-product-card-list
   [products]="(products$ | async) || []"
   [totalCount]="(totalCount$ | async) || 0"
+  (addTo)="shoppingCartService.addProduct($event)"
   [(pageIndex)]="pageIndex"
   [pageSize]="pageSize"
   [products]="products"

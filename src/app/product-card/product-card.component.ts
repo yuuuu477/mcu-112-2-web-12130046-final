@@ -31,6 +31,9 @@ export class ProductCardComponent {
   @Input() createDate!: Date;
   @Input({ transform: numberAttribute }) price!: number;
 
+  @Output()
+  addTo = new EventEmitter<void>();
+
   @HostBinding('class')
   class = 'product-card';
 

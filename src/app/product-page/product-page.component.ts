@@ -13,7 +13,7 @@ import {
 import { Product } from '../model/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
 import { ProductService } from '../service/product.service';
-
+import { ShoppingCartService } from '../service/shopping-cart.service';
 @Component({
   selector: 'app-product-page',
   standalone: true,
@@ -25,6 +25,8 @@ export class ProductPageComponent {
   router = inject(Router);
 
   private productService = inject(ProductService);
+
+  readonly shoppingCartService = inject(ShoppingCartService);
 
   protected pageSize = 5;
   protected readonly formControl = new FormControl<string | undefined>(
@@ -80,6 +82,7 @@ export class ProductPageComponent {
     console.log(index);
     this.pageIndex = index;
   }
+  onAdd(): void {}
 
   onEdit(product: Product): void {
     this.router.navigate(['product', 'form', product.id]);

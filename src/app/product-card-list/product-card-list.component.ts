@@ -25,6 +25,9 @@ export class ProductCardListComponent {
   @Input({ required: true, transform: numberAttribute })
   pageSize!: number;
 
+  @Output()
+  addTo = new EventEmitter<Product>();
+
   @Input({ required: true, transform: numberAttribute })
   pageIndex = 1;
 
