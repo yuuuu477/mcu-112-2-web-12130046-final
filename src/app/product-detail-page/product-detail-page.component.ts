@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../model/product';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-product-detail-page',
@@ -28,7 +28,9 @@ export class ProductDetailPageComponent implements OnInit {
   private productService = inject(ProductService);
 
   ngOnInit(): void {
-    this.product = this.productService.getById(this.id);
+    this.productService
+      .getById(this.id)
+      .subscribe((product) => (this.product = product));
   }
   onEdit(): void {
     this.router.navigate(['product', 'form', this.product.id]);
@@ -37,7 +39,6 @@ export class ProductDetailPageComponent implements OnInit {
   onRemove(): void {
     this.router.navigate(['products']);
   }
-
   onBack(): void {
     this.router.navigate(['products']);
   }

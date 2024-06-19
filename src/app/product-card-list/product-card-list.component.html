@@ -19,7 +19,8 @@
   }
 </div>
 <app-pagination
-  totalCount="7"
-  pageSize="5"
-  [(pageIndex)]="pageIndex"
+  [totalCount]="totalCount"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  (pageIndexChange)="pageIndexChange.emit($event)"
 ></app-pagination>

@@ -1,9 +1,13 @@
 <span>
-  <input type="text" placeholder="產品名稱" />
-  <button type="button">查詢</button>
+  <input type="text" placeholder="產品名稱" [formControl]="formControl" />
+  <button type="button" (click)="condition = formControl.value">查詢</button>
 </span>
 
 <app-product-card-list
+  [products]="(products$ | async) || []"
+  [totalCount]="(totalCount$ | async) || 0"
+  [(pageIndex)]="pageIndex"
+  [pageSize]="pageSize"
   [products]="products"
   (edit)="onEdit($event)"
   (view)="onView($event)"
