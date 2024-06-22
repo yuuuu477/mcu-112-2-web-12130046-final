@@ -1,3 +1,5 @@
+import { ShoppingCartService } from './../service/shopping-cart.service';
+import { ShoppingCartPageComponent } from './../shopping-cart-page/shopping-cart-page.component';
 import { CurrencyPipe } from '@angular/common';
 import {
   Component,
@@ -24,9 +26,10 @@ export class ProductDetailPageComponent implements OnInit {
   product!: Product;
 
   private router = inject(Router);
+  private readonly ShoppingCartService = inject(ShoppingCartService);
 
   private productService = inject(ProductService);
-
+  private shoppingCartService = inject(ShoppingCartService);
   ngOnInit(): void {
     this.productService
       .getById(this.id)
@@ -34,6 +37,10 @@ export class ProductDetailPageComponent implements OnInit {
   }
   onEdit(): void {
     this.router.navigate(['product', 'form', this.product.id]);
+  }
+
+  onAddCart(product: Product): void {
+    this.shoppingCartService.addProduct(product);
   }
 
   onRemove(): void {

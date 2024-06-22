@@ -22,7 +22,7 @@ div.button button {
   cursor: pointer;
 }
 
-button.edit {
+button.addToCart {
   background-color: #007bff;
   color: white;
 }
@@ -34,4 +34,8 @@ button.remove {
 
 .discount {
   color: red;
+}
+
+.notShow {
+  color: #999;
 }

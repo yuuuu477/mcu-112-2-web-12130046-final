@@ -13,6 +13,7 @@
     [createDate]="product.createDate"
     [price]="product.price"
     (view)="view.emit(product)"
+    (addToCart)="addToCart.emit(product)"
     (edit)="edit.emit(product)"
     (remove)="remove.emit(product)"
   ></app-product-card>

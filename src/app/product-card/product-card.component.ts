@@ -32,7 +32,7 @@ export class ProductCardComponent {
   @Input({ transform: numberAttribute }) price!: number;
 
   @Output()
-  addTo = new EventEmitter<void>();
+  addToCart = new EventEmitter<void>();
 
   @HostBinding('class')
   class = 'product-card';

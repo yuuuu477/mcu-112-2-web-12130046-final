@@ -82,10 +82,16 @@ export class ProductPageComponent {
     console.log(index);
     this.pageIndex = index;
   }
-  onAdd(): void {}
+  onAdd(): void {
+    this.router.navigate(['product', 'form']);
+  }
 
   onEdit(product: Product): void {
     this.router.navigate(['product', 'form', product.id]);
+  }
+
+  onAddCart(product: Product): void {
+    this.shoppingCartService.addProduct(product);
   }
 
   onView(product: Product): void {
