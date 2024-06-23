@@ -1,6 +1,6 @@
 import { ShoppingCartService } from './../service/shopping-cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -9,15 +9,16 @@ import {
 } from '@angular/forms';
 import { IOrderForm } from '../interface/order-form.interface';
 import { IOrderDetailForm } from '../interface/order-detail-form.interface';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-shopping-cart-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CurrencyPipe, ReactiveFormsModule],
   templateUrl: './shopping-cart-page.component.html',
   styleUrl: './shopping-cart-page.component.css',
 })
-export class ShoppingCartPageComponent {
+export class ShoppingCartPageComponent implements OnInit {
   readonly shoppingCartService = inject(ShoppingCartService);
   readonly form = new FormGroup<IOrderForm>({
     name: new FormControl<string | null>(null),
@@ -40,5 +41,24 @@ export class ShoppingCartPageComponent {
 
   get details(): FormArray<FormGroup<IOrderDetailForm>> {
     return this.form.get('details') as FormArray<FormGroup<IOrderDetailForm>>;
+  }
+
+  ngOnInit(): void {
+    this.setOrderDetail();
+  }
+
+  private setOrderDetail() {
+    for (const item of this.shoppingCartService.data) {
+      const control = new FormGroup<IOrderDetailForm>({
+        id: new FormControl<number>(item.id, { nonNullable: true }),
+        product: new FormControl<Product>(item.product, { nonNullable: true }),
+        count: new FormControl<number>(item.count, { nonNullable: true }),
+        price: new FormControl<number>(item.product.price * item.count, {
+          nonNullable: true,
+        }),
+      });
+
+      this.details.push(control);
+    }
   }
 }
