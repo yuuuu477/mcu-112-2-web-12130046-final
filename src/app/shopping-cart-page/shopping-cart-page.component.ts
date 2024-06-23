@@ -6,6 +6,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { IOrderForm } from '../interface/order-form.interface';
 import { IOrderDetailForm } from '../interface/order-detail-form.interface';
@@ -21,9 +22,15 @@ import { Product } from '../model/product';
 export class ShoppingCartPageComponent implements OnInit {
   readonly shoppingCartService = inject(ShoppingCartService);
   readonly form = new FormGroup<IOrderForm>({
-    name: new FormControl<string | null>(null),
-    address: new FormControl<string | null>(null),
-    telephone: new FormControl<string | null>(null),
+    name: new FormControl<string | null>(null, {
+      validators: [Validators.required],
+    }),
+    address: new FormControl<string | null>(null, {
+      validators: [Validators.required],
+    }),
+    telephone: new FormControl<string | null>(null, {
+      validators: [Validators.required],
+    }),
     details: new FormArray<FormGroup<IOrderDetailForm>>([]),
   });
 
