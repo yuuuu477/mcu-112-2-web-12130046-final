@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "書籍A",
+      "name": "A 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -12,7 +12,7 @@
       "price": 1580.0
     },
     {
-      "name": "書籍B",
+      "name": "B 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -22,7 +22,7 @@
       "id": 2
     },
     {
-      "name": "書籍C",
+      "name": "C 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -32,7 +32,7 @@
       "id": 3
     },
     {
-      "name": "書籍D",
+      "name": "D 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -42,7 +42,7 @@
       "id": 4
     },
     {
-      "name": "書籍E",
+      "name": "E產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -52,7 +52,7 @@
       "id": 5
     },
     {
-      "name": "書籍F",
+      "name": "F 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
@@ -62,7 +62,7 @@
       "id": 6
     },
     {
-      "name": "書籍G",
+      "name": "G 產品",
       "authors": ["作者甲", "作者乙", "作者丙"],
       "company": "博碩文化",
       "isShow": true,
