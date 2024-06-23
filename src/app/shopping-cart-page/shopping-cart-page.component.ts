@@ -1,3 +1,5 @@
+import { OrderService } from './../interface/order.service';
+import { Order } from './../interface/order';
 import { ShoppingCartService } from './../service/shopping-cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
@@ -10,9 +12,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { IOrderForm } from '../interface/order-form.interface';
-import { filter, map } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { IOrderDetailForm } from '../interface/order-detail-form.interface';
 import { Product } from '../model/product';
+import { OrderDetail } from '../interface/order-detail';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -22,7 +26,9 @@ import { Product } from '../model/product';
   styleUrl: './shopping-cart-page.component.css',
 })
 export class ShoppingCartPageComponent implements OnInit {
+  private router = inject(Router);
   readonly shoppingCartService = inject(ShoppingCartService);
+  readonly OrderService = inject(OrderService);
   readonly form = new FormGroup<IOrderForm>({
     name: new FormControl<string | null>(null, {
       validators: [Validators.required],
@@ -54,6 +60,16 @@ export class ShoppingCartPageComponent implements OnInit {
 
   private readonly destroyRef = inject(DestroyRef);
   totalPrice = 0;
+
+  get formData(): Order {
+    return new Order({
+      name: this.name.value!,
+      address: this.address.value!,
+      telephone: this.telephone.value!,
+      details: this.details.value.map((item) => new OrderDetail(item)),
+    });
+  }
+
   ngOnInit(): void {
     this.details.valueChanges
       .pipe(
@@ -97,5 +113,11 @@ export class ShoppingCartPageComponent implements OnInit {
   onDelete(index: number, id: number): void {
     this.details.removeAt(index);
     this.shoppingCartService.removeProduct(id);
+  }
+  onSave(): void {
+    this.OrderService.add(this.formData).subscribe(() => {
+      this.shoppingCartService.clear();
+      void this.router.navigate(['/']);
+    });
   }
 }

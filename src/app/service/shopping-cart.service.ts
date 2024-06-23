@@ -23,4 +23,7 @@ export class ShoppingCartService {
   removeProduct(id: number): void {
     this.data = [...this.data.filter((item) => item.id != id)];
   }
+  clear(): void {
+    this.data = [];
+  }
 }
