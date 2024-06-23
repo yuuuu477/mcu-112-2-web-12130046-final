@@ -1,6 +1,7 @@
 import { ShoppingCartService } from './../service/shopping-cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormArray,
   FormControl,
@@ -9,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IOrderForm } from '../interface/order-form.interface';
+import { filter, map } from 'rxjs';
 import { IOrderDetailForm } from '../interface/order-detail-form.interface';
 import { Product } from '../model/product';
 
@@ -50,7 +52,22 @@ export class ShoppingCartPageComponent implements OnInit {
     return this.form.get('details') as FormArray<FormGroup<IOrderDetailForm>>;
   }
 
+  private readonly destroyRef = inject(DestroyRef);
+  totalPrice = 0;
   ngOnInit(): void {
+    this.details.valueChanges
+      .pipe(
+        map((item) =>
+          item.length === 0
+            ? 0
+            : item
+                .map((item) => item.price || 0)
+                .reduce((total, price) => total + price)
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((totalPrice) => (this.totalPrice = totalPrice));
+
     this.setOrderDetail();
   }
 
@@ -64,7 +81,16 @@ export class ShoppingCartPageComponent implements OnInit {
           nonNullable: true,
         }),
       });
-
+      control
+        .get('count')
+        ?.valueChanges.pipe(
+          filter((value) => value !== undefined),
+          map((value) => value * item.product.price),
+          takeUntilDestroyed(this.destroyRef)
+        )
+        .subscribe((price) =>
+          control.get('price')!.setValue(price, { emitEvent: false })
+        );
       this.details.push(control);
     }
   }

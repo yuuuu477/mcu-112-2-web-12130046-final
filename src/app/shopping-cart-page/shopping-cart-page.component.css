@@ -88,7 +88,7 @@ div.delete button {
   background-color: transparent;
   cursor: pointer;
   color: #ba1a1a;
-  border: 1px solid #ba1a1a;
+  border: solid 1px #ba1a1a;
 }
 
 .toolbar {
@@ -102,12 +102,13 @@ div.delete button {
   background-color: transparent;
   cursor: pointer;
   color: #005cbb;
-  border: 1px solid #005cbb;
+  border: solid 1px #005cbb;
 }
 
 .toolbar button:disabled {
   color: #999;
-  border: 1px solid #999;
+  border: solid 1px #999;
+  cursor: not-allowed;
 }
 
 span.error-message {
